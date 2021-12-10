@@ -89,7 +89,6 @@ const App = () => {
   //----------------------------
 
   const handleClick = () => {
-    console.log(getColour());
     setColour(getColour);
   }
 
@@ -97,7 +96,7 @@ const App = () => {
     <div className="App">
       <div className="colourBox">
         <h1>colour is:</h1>
-        <h2>{getColour()}</h2>
+        <h2>{colour}</h2>
         <button onClick={handleClick}>Click Me</button>
       </div>
 
