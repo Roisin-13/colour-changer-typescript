@@ -1,9 +1,10 @@
 const path = require('path');
-//const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
     // change to .tsx if necessary
-    entry: './src/app.jsx',
+    entry: './src/App.jsx',
     output: {
         filename: './bundle.js'
     },
@@ -14,10 +15,13 @@ module.exports = {
     module: {
         rules: [
             // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' }, exclude: /node_modules/ },
-            { test: /\.(t|j)sx?$/, use: { loader: 'ts-loader' }, exclude: /node_modules/ },
+            { test: /\.(t|j)sx?$/, use: { loader: 'ts-loader' }, exclude: "/node_modules/"},
+
+            //needed for css apparently!
+            { test: /\.css$/i, use: ["style-loader", "css-loader"], exclude: "/node_modules/"},
 
             // addition - add source-map support
-            { enforce: "pre", test: /\.js$/, exclude: /node_modules/, loader: "source-map-loader" }
+            { enforce: "pre", test: /\.js$/, exclude: "/node_modules/", loader: "source-map-loader" }
         ]
     },
     externals: {
@@ -25,11 +29,11 @@ module.exports = {
         "react-dom": "ReactDOM",
     },
     // addition - add source-map support
-    devtool: "source-map"
-}
-//     plugins: [
-//         new HtmlWebpackPlugin({
-//             template: path.join(__dirname, "src", "index.html"),
-//         }),
-//     ],
-// }
+    devtool: "source-map",
+    //},
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, "public", "index.html"),
+        }),
+    ],
+ }
